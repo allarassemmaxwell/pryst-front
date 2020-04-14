@@ -1,0 +1,26 @@
+
+<ion-content>
+
+  <div class="logo-background-color">
+      <img src="/assets/images/icon.png" class="logo">
+      <h2 class="top-sign-in">Signed in as: {{ userEmail }}</h2>
+  </div>
+
+<div class="bg-text">
+  <ion-button color="light" slot="start" class="button-background" (click)="moveToOutlet()">
+    <div style="color: #3082D6;">Outlet</div>
+  </ion-button>
+  
+  <ion-button color="light" slot="start" class="button-background" (click)="moveToProduct()">
+    <div style="color: #3082D6;">Product</div>
+  </ion-button>
+
+  <ion-button color="light" slot="start" class="button-background" (click)="moveToAudit()">
+    <div style="color: #3082D6;">Audit</div>
+  </ion-button>
+
+  <ion-button color="primary" (click)="logout()" style="width: 80%;">
+    Log out
+  </ion-button>
+</div>
+</ion-content>

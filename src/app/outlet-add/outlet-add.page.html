@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title>Add Outlet</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="registrationForm" (ngSubmit)="submit()">
+      <ion-list>
+          <ion-item>
+              <ion-label position="floating">Name</ion-label>
+              <ion-input autocapitalize inputmode="text" formControlName="name" clearInput></ion-input>
+          </ion-item>
+          <div *ngFor="let error of errorMessages.name">
+              <ng-container *ngIf="name.hasError(error.type) && (name.dirty || name.touched)">
+                  <small class="error-message">{{error.message}}</small>
+              </ng-container>
+          </div>
+      </ion-list>
+
+      <ion-list>
+          <ion-item>
+              <ion-label position="floating">Category</ion-label>
+              <ion-select formControlName="category">
+                  <ion-select-option *ngFor="let category of outletCategories" value="{{ category.slug }}">{{ category.name }}</ion-select-option>
+              </ion-select>
+          </ion-item>
+      </ion-list>
+
+      <ion-list style="background-color: transparent;">
+          <ion-button style="height: 45px;" expand="block" type="submit" class="login-button" [disabled]="!registrationForm.valid">Register</ion-button>
+      </ion-list>
+  </form>
+</ion-content>
+
+

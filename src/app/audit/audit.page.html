@@ -1,0 +1,124 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+      </ion-buttons>
+
+      <ion-title>Audit</ion-title>
+
+      <ion-buttons slot="end" >
+          <ion-button *ngIf="!addBtn" (click)="addProduct()" color="light">
+              <ion-icon name="checkmark-circle-outline"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+<ion-content>
+
+  <form>
+      <ion-row class="ion-no-padding">
+          <ion-col size="3" class="ion-no-padding">
+              <ion-item> 
+                  <ion-input (click)="show()"  type="text" placeholder="Outlet" value="{{outletName}}"></ion-input>
+              </ion-item>
+          </ion-col>
+          <ion-col size="3" class="ion-no-padding">
+              <ion-item> 
+                  <ion-input (click)="showProduct()"  type="text" placeholder="Product" value="{{productName}}"></ion-input>
+              </ion-item>
+          </ion-col>
+          <ion-col size="3" class="ion-no-padding">
+              <ion-item>
+                  <ion-input (click)="showSearch = false ; showProducts = false"  type="number" placeholder="Price" [(ngModel)]="price" name="price"></ion-input>
+              </ion-item>
+          </ion-col>
+          <ion-col size="3" class="ion-no-padding">
+              <ion-item>
+                  <ion-input (click)="showSearch = false; showProducts = false" type="text" placeholder="Measure" [(ngModel)]="measure" name="measure"></ion-input>
+              </ion-item>
+          </ion-col>
+      </ion-row>
+
+      <!-- DISPLAY LIST OF OUTLETS -->
+      <div  *ngIf="showSearch">
+          <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchOutlet()" name="searchTerm"></ion-searchbar>
+              <ion-item *ngFor= "let outlet of outlets" (click)="selectOutlet(outlet.name)">
+                  {{ outlet.name }}
+              </ion-item>
+      </div>
+
+      <!-- DISPLAY LIST OF PRODUCTS -->
+      <div  *ngIf="showProducts">
+          <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchProduct()" name="searchTerm"></ion-searchbar>
+              <ion-item *ngFor = "let product of products" (click)="selectProduct(product.name)">
+                  {{ product.name }}
+              </ion-item>
+      </div>
+
+
+      <!-- SHOW NO OUTLET FOUND -->
+      <div *ngIf="showNone" style="margin-top: 40px;text-align: center;font-weight: bolder;"> 
+          <ion-label>No outlet found</ion-label>
+      </div>
+  </form>
+
+      
+  <div *ngIf="data.length != 0" style="margin-top: 75px;">
+      <ion-row style="padding-left: 10px; color: #3082D6;">
+          <ion-col>Outlet</ion-col>
+          <ion-col>Product</ion-col>
+          <ion-col>Price</ion-col>
+          <ion-col>Measure</ion-col>
+      </ion-row>
+      <div style="height: 1px; background-color: gray; opacity: 0.1; margin-bottom: 10px;"></div>
+      <ion-row *ngFor="let prod of data">
+          <ion-col size="3">
+              <ion-item> 
+                  {{prod.outletName}}
+              </ion-item>
+          </ion-col>
+          <ion-col size="3">
+              <ion-item> 
+                  {{prod.productName}}
+              </ion-item>
+          </ion-col>
+          <ion-col size="3">
+              <ion-item>
+                  {{prod.price}}
+              </ion-item>
+          </ion-col>
+          <ion-col size="3">
+              <ion-item>
+                  {{prod.measure}}
+              </ion-item>
+          </ion-col>
+          <span style="margin-left: 80%; margin-top: -2;">
+              <ion-buttons>
+                  <ion-button slot="end" (click)="delete(data.indexOf(prod))">
+                      <ion-icon name="trash" color="danger"></ion-icon>
+                  </ion-button>
+              </ion-buttons>
+          </span>
+      </ion-row>
+
+      <ion-row *ngIf="data.length != 0">
+          <ion-col size="6" class="ion-text-center" (click)="uploadData()">
+              <ion-button expand="full" color="success">
+              Upload data
+          </ion-button>
+          </ion-col>
+          <ion-col size="6" class="ion-text-center" (click)="deleteAll()">
+              <ion-button expand="full" color="danger">
+                  Delete all
+              </ion-button>
+          </ion-col>
+      </ion-row>
+  </div>
+
+
+
+</ion-content>

@@ -1,0 +1,93 @@
+<ion-content>
+
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="Pull to refresh"
+          refreshingSpinner="circles"
+          refreshingText="Refreshing...">
+      </ion-refresher-content>
+  </ion-refresher>
+  
+  <p class="go-back">
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/home" color="light"></ion-back-button>
+      </ion-buttons>
+  </p>
+
+  <div class="top-image">
+      <div class="content">
+         
+          <div class="icon-search" (click)="showSearchBar()">
+              <ion-button fill="clear">
+                  <ion-icon name="search" style="margin-left: -10px; margin-top: -10px;"></ion-icon>
+              </ion-button>
+          </div>
+          
+          <div *ngIf="showSearch">
+              <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchProduct()" name="searchTerm"></ion-searchbar>
+          </div>
+   
+          <h2 class="top-title">PRODUCTS</h2>
+
+          <div>
+              <!-- SKELETON -->
+              <div *ngIf="!products">
+                  <div class="product-container">
+                      <div class="product-content">
+                          <ion-skeleton-text  class="skeleton" animated></ion-skeleton-text>
+                          <ion-skeleton-text  class="skeleton" animated></ion-skeleton-text>
+                          <ion-skeleton-text  class="skeleton" animated></ion-skeleton-text>
+                          <ion-skeleton-text  class="skeleton" animated></ion-skeleton-text>
+                      </div>
+                  </div>
+
+                  <div class="product-container">
+                      <div class="product-content">
+                          <ion-skeleton-text  class="skeleton" animated></ion-skeleton-text>
+                          <ion-skeleton-text  class="skeleton" animated></ion-skeleton-text>
+                          <ion-skeleton-text  class="skeleton" animated></ion-skeleton-text>
+                          <ion-skeleton-text  class="skeleton" animated></ion-skeleton-text>
+                      </div>
+                  </div>
+
+                  <div class="product-container">
+                      <div class="product-content">
+                          <ion-skeleton-text  class="skeleton" animated></ion-skeleton-text>
+                          <ion-skeleton-text  class="skeleton" animated></ion-skeleton-text>
+                          <ion-skeleton-text  class="skeleton" animated></ion-skeleton-text>
+                          <ion-skeleton-text  class="skeleton" animated></ion-skeleton-text>
+                      </div>
+                  </div>
+
+                  <div class="product-container">
+                      <div class="product-content">
+                          <ion-skeleton-text  class="skeleton" animated></ion-skeleton-text>
+                          <ion-skeleton-text  class="skeleton" animated></ion-skeleton-text>
+                          <ion-skeleton-text  class="skeleton" animated></ion-skeleton-text>
+                          <ion-skeleton-text  class="skeleton" animated></ion-skeleton-text>
+                      </div>
+                  </div>
+              </div>
+
+
+              <!-- LOOPING PRODUCTS -->
+              <div *ngFor="let product of products">
+                  <div class="product-container">
+                      <div class="product-content" (click)="moveToProductDetail(product)">
+                          Name: {{ product.name }} <br>
+                          Category: {{ product.category }} <br>
+                          Brand: {{ product.brand }} <br>
+                          Model: {{ product.model }}
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+
+      </div>
+  </div>
+</ion-content>
+
+

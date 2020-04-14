@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-title color="primary">Product detail</ion-title>
+      <ion-buttons slot="end">
+          <ion-button  (click)="close()">
+              <ion-icon name="close-circle-outline" size="large"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div class="container">
+      <ion-img *ngIf="!data.image" src="../../assets/images/no-product.jpg" class="image"></ion-img>
+      <ion-img *ngIf="data.image" src="data.image" class="image"></ion-img>
+      <div class="description"><br><br>
+          Product: {{ data.name }} <br>
+          Manufacturer: {{ data.manufacturer }} <br>
+          Category: {{ data.category }} <br>
+          Brand: {{ data.brand }} <br>
+          Model: {{ data.model }} <br>
+          Measure: {{ data.measure }} <br>
+          <p>
+            <b>Content</b><br>
+            {{ data.content }}
+          </p>
+      </div>
+  </div>
+</ion-content>

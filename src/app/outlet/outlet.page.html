@@ -1,0 +1,97 @@
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="Pull to refresh"
+          refreshingSpinner="circles"
+          refreshingText="Refreshing...">
+      </ion-refresher-content>
+  </ion-refresher>
+  
+  <p class="header">
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/home" color="light"></ion-back-button>
+      </ion-buttons>
+  </p>
+
+  <div class="top-image">
+      <div class="content">
+         
+          <div class="ioncon-search" (click)="showSearchBar()">
+              <ion-button fill="clear">
+                  <ion-icon name="search"></ion-icon>
+              </ion-button>
+          </div>
+          
+          <div *ngIf="showSearch">
+              <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="search()" name="searchTerm"></ion-searchbar>
+          </div>
+
+          <h2 class="top-title">OUTLET</h2>
+
+          <!-- SKELETON -->
+          <div *ngIf="!outlets">
+              <div class="outlet-container">
+                  <div class="outlet-content">
+                      <ion-skeleton-text  class="skeleton" animated></ion-skeleton-text><br>
+                      <ion-skeleton-text  class="skeleton" animated></ion-skeleton-text><br>
+                  </div>
+                  <div class="add-gps" (click)="moveToAddGPS()">
+                      <ion-skeleton-text  class="skeleton" animated></ion-skeleton-text>
+                  </div>
+              </div>
+              <div class="outlet-container">
+                  <div class="outlet-content">
+                      <ion-skeleton-text  class="skeleton" animated></ion-skeleton-text><br>
+                      <ion-skeleton-text  class="skeleton" animated></ion-skeleton-text><br>
+                  </div>
+                  <div class="add-gps" (click)="moveToAddGPS()">
+                      <ion-skeleton-text  class="skeleton" animated></ion-skeleton-text>
+                  </div>
+              </div>
+              <div class="outlet-container">
+                  <div class="outlet-content">
+                      <ion-skeleton-text  class="skeleton" animated></ion-skeleton-text><br>
+                      <ion-skeleton-text  class="skeleton" animated></ion-skeleton-text><br>
+                  </div>
+                  <div class="add-gps" (click)="moveToAddGPS()">
+                      <ion-button size="small" style="list-style-type: circle; height: 23px;" color="success"></ion-button>
+                      <ion-skeleton-text  class="skeleton" animated></ion-skeleton-text>
+                  </div>
+              </div>
+          </div>
+
+          <!-- LOOPING OUTLETS -->
+          <div *ngFor="let outlet of outlets">
+              
+              <div class="outlet-container">
+                  <div class="outlet-content">
+          Name: {{ outlet.name }}<br>
+                      Id: {{ outlet.outlet_id }} <br>
+                      Category: {{ outlet.category }} <br>
+          County: {{ outlet.county }}
+        </div>
+        <div *ngIf="outlet.gps" class="add-gps" (click)="moveToAddGPS()">
+          <ion-button size="small" color="success"></ion-button>
+          <span>See GPS location</span>
+                  </div>
+                  <div *ngIf="!outlet.gps" class="add-gps" (click)="moveToAddGPS()">
+          <ion-button size="small" color="medium"></ion-button>
+          <span>Add GPS location</span>
+        </div>
+              </div>
+    </div>
+    
+
+          <!-- CREATE NEW OUTLET -->
+          <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="moveToCreateOutlet()" style="position: fixed;">
+              <ion-fab-button size="small">
+                  <ion-icon name="create"></ion-icon>
+              </ion-fab-button>
+          </ion-fab>
+
+      </div><br><br><br>
+  </div>
+</ion-content>
+
+

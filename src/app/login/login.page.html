@@ -1,0 +1,36 @@
+
+<ion-content padding>
+	<ion-row>
+		<img src="/assets/images/icon.png" title="logo">
+		<h2>Welcome</h2>
+		<p>Sign in to continue</p>
+	</ion-row>		
+
+
+	<form [formGroup]="registrationForm" (ngSubmit)="submit()">
+		<ion-list class="background-input">
+			<ion-item>
+				<ion-input autocapitalize type="email" formControlName="username" placeholder="Email" clearInput></ion-input>
+			</ion-item>
+			<div *ngFor="let error of errorMessages.username">
+				<ng-container *ngIf="username.hasError(error.type) && (username.dirty || username.touched)">
+					<small class="error-message">{{error.message}}</small>
+				</ng-container>
+			</div>
+	
+			<ion-item>
+				<ion-input type="password" formControlName="password" placeholder="Password" clearInput></ion-input>
+			</ion-item>
+			<div *ngFor="let error of errorMessages.password">
+				<ng-container *ngIf="password.hasError(error.type) && (password.dirty || password.touched)">
+					<small class="error-message">{{error.message}}</small>
+				</ng-container>
+			</div>
+
+		</ion-list>
+		<ion-button expand="full" type="submit" class="login-button" [disabled]="!registrationForm.valid">Login</ion-button>
+	</form>
+
+	<p class="forgot-password">Forgot password? Recover <span style="color: red;" (click)="presentAlertForgotPassword()">here</span></p>
+
+</ion-content>
